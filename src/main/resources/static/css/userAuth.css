@@ -1,0 +1,15 @@
+.responseBlock-none {
+    display: none;
+}
+
+.responseBlock-visible {
+    display: block;
+}
+
+.response-success {
+    color: green;
+}
+
+.response-error {
+    color: red;
+}

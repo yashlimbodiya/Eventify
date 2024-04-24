@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/landingPage.css">
+    <script src="/js/jQuery.js"></script>
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <a th:href="@{/}"><img src="/images/logo-color.png" alt="Eventify Logo"></a>
+        </div>
+    </div>
+</nav>
+<section class="auth-container">
+    <div class="auth-small-container">
+        <h2>Log in to your account</h2>
+        <div id="alertMessage" class="alert" style="display: none;"></div>
+        <form id="loginForm">
+            <input class="input"  name="username" id="email" type="text" placeholder="Email Address"/>
+            <input class="input" name="password" id="password" type="password" placeholder="Password"/>
+            <input type="submit" class="action-btn" value="LOGIN"/>
+        </form>
+        <hr>
+        <div class="secondary-text-div">
+            <p>Don't have an account? <a class="secondary-link" th:href="@{/register}">Create Account</a></p>
+            <p>Want to publish event? <a class="secondary-link" th:href="@{/becameOrganizer}">Become Organizer</a></p>
+        </div>
+    </div>
+</section>
+<script src="/js/userAuth.js"></script>
+</body>
+</html>

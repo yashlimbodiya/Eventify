@@ -1,0 +1,100 @@
+.column {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+    margin: 20px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {
+    margin: 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 350px;
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+
+.card-container {
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.card-img {
+    height: 200px;
+    width: 100%;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.event-info {
+    text-align: left;
+    padding: 10px;
+}
+
+.event-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.event-reg-btn {
+    text-align: center;
+    border: 2px solid #FE002A;
+    color: #FE002A;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.event-reg-btn:hover {
+    text-align: center;
+    border: 2px solid #FE002A;
+    background-color: #FE002A;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.event-reg-update-btn {
+    text-align: center;
+    border: 2px solid #888888;
+    color: #888888FF;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.event-reg-update-btn:hover {
+    text-align: center;
+    border: 2px solid #888888FF;
+    background-color: #888888FF;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+

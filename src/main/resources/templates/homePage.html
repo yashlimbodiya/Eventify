@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventify</title>
+    <link rel="stylesheet" href="/css/landingPage.css">
+    <link rel="stylesheet" href="/css/card.css">
+    <script src="/js/jQuery.js" ></script>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <a th:href="@{/home}"><img src="./images/logo-color.png" alt="Eventify Logo"></a>
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <ul class="menu responsive">
+                <li><a class="nav-category" th:data-category="Entertainment" th:onclick="|fetchByCategory(this.getAttribute('data-category'))|" th:attr="data-category=${category}">Entertainment</a></li>
+                <li><a class="nav-category" th:data-category="Travel" th:onclick="|fetchByCategory(this.getAttribute('data-category'))|" th:attr="data-category=${category}">Travel & Outdoor</a></li>
+                <li><a class="nav-category" th:data-category="Career" th:onclick="|fetchByCategory(this.getAttribute('data-category'))|" th:attr="data-category=${category}">Career & Business</a></li>
+                <li><a class="nav-category" th:data-category="Technology" th:onclick="|fetchByCategory(this.getAttribute('data-category'))|" th:attr="data-category=${category}">Technology</a></li>
+                <li><a class="nav-category" th:href="@{/myAccount}">My Account</a></li>
+                <li><a th:href="@{/logout}" id="logout-btn" class="navbar-btn">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section class="hero-section-home">
+    <div class="user-intro">
+        Hello, <h2 th:text="${session.userFirstName}"></h2>
+    </div>
+    <hr>
+    <div class="search-location-div">
+        <form id="fetchByCity">
+            <label for="location">Search By Location: </label>
+            <select id="location" name="cities">
+                <option value="all" selected>All</option>
+                <option value="Boston">Boston</option>
+                <option value="Miami">Miami</option>
+                <option value="New York">New York</option>
+                <option value="Los Angelos">Los Angelos</option>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="card-container">
+        <div class="row">
+            <div class="column" th:each="event : ${eventList}">
+                <div class="card">
+                    <img src="./images/card-img.png" alt="" class="card-img">
+                    <div class="event-info">
+                        <p class="event-name" th:text="${event.eventName}"></p>
+                        <p class="event-time" th:text="${event.eventDate}"></p>
+                        <p class="event-loc" th:text="${event.location}"></p>
+                        <a href="#" class="event-reg-btn"
+                           th:data-user-id="${session.user_id}" th:data-event-name="${event.eventId}"
+                           th:onclick="|saveRegistrationDetails(this.getAttribute('data-user-id'), this.getAttribute('data-event-name'))|">
+                            Register
+                        </a>
+                        <a href="#" class="event-reg-update-btn"
+                           th:data-user-id="${session.user_id}" th:data-event-name="${event.eventId}"
+                           th:onclick="|updateRegistrationDetails(this.getAttribute('data-user-id'), this.getAttribute('data-event-name'))|">
+                            Not Interested
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <h1 th:text="${session.userId}"></h1>
+</section>
+<script src="/js/eventHandler.js"></script>
+</body>
+
+</html>

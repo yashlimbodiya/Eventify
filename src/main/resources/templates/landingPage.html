@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventify</title>
+    <link rel="stylesheet" href="/css/landingPage.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <a href="#"><img src="/images/logo-color.png" alt="Eventify Logo"></a>
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <button class="menu-icon" onclick="toggleMenu()">&#9776;</button>
+            <ul class="menu responsive">
+                <li><a th:href="@{/login}">
+                        <button id="login-btn" class="navbar-btn">Login</button>
+                    </a>
+                </li>
+                <li><a th:href="@{/becameOrganizer}">Become Organizer</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section class="hero-section">
+    <section class="hero-section-content">
+        <h1>Elevate Your Social Calendar<br />
+            <div id="big-heading">Explore with <strong>Eventify</strong></div>
+        </h1>
+    </section>
+    <a th:href="@{/register}">
+        <button class="join-cm-btn">Join the community</button>
+    </a>
+    <p class="hero-section-p">Discover, connect, and experience with Eventify! Whether you're seeking the hottest
+        concerts, immersive workshops, or exclusive gatherings, our platform empowers you to curate your perfect
+        event itinerary. Join us and let the adventures begin!</p>
+</section>
+
+</body>
+
+</html>

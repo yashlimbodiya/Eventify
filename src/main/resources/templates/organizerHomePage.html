@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventify</title>
+    <link rel="stylesheet" href="/css/landingPage.css">
+    <link rel="stylesheet" href="/css/card.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <a href="#"><img src="./images/logo-color.png" alt="Eventify Logo"></a>
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <ul class="menu responsive">
+                <li><a th:href="@{/createEvent}" class="create-event-btn nav-category">+ Create Event</a></li>
+                <li><a th:href="@{/logout}" id="logout-btn" class="navbar-btn">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section class="hero-section-home">
+    <div class="user-intro">
+        Hello, <h2 th:text="${session.userFirstName}"></h2>
+    </div>
+    <hr>
+    <div class="card-container">
+        <div class="organizer-event-detail">
+            <h3>My Published Events</h3>
+            <div class="total-event-posted">
+                <h3>Total Event Published:&nbsp;&nbsp;</h3>
+                <h3 th:text="${totalEvents}"></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column" th:each="event : ${eventList}">
+                <div class="card">
+                    <img src="./images/card-img.png" alt="" class="card-img">
+                    <div class="event-info">
+                        <p class="event-name" th:text="${event.eventName}"></p>
+                        <p class="event-time" th:text="${event.eventDate}"></p>
+                        <p class="event-loc" th:text="${event.location}"></p>
+                        <a href="#" class="event-reg-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+
+</html>

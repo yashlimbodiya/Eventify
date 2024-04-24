@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script src="/js/jQuery.js"></script>
+    <link rel="stylesheet" href="/css/landingPage.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <a th:href="@{/}"><img src="/images/logo-color.png" alt="Eventify Logo"></a>
+        </div>
+    </div>
+</nav>
+<section class="auth-container">
+    <div class="auth-small-container">
+        <h2>Create organizer account</h2>
+        <div id="alertMessage" class="alert" style="display: none;"></div>
+        <form id="registerForm">
+            <input class="input" id="fname" name="firstName" type="text" placeholder="Enter your first name"/>
+            <input class="input" id="lname" name="lastName" type="text" placeholder="Enter your last name"/>
+            <input class="input" id="email" name="email" type="text" placeholder="Enter your email address" required/>
+            <input class="input" id="mobile" name="mobileNo" type="text" placeholder="Enter your mobile number" required/>
+            <input class="input" id="password" name="password" type="password" placeholder="Create your password" required/>
+            <input class="input" id="type" name="type" type="hidden" value="organizer"/><br/>
+            <input type="submit" class="action-btn" value="CREATE ACCOUNT"/>
+        </form>
+        <hr>
+        <div class="secondary-text-div">
+            <p>Already have an account? <a class="secondary-link" th:href="@{/login}">Login</a></p>
+        </div>
+    </div>
+
+</section>
+<script src="/js/userAuth.js"></script></body>
+</html>

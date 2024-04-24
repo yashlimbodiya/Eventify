@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="/css/landingPage.css">
+  <script src="/js/jQuery.js"></script>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <div class="logo">
+      <a th:href="@{/home}"><img src="./images/logo-color.png" alt="Eventify Logo"></a>
+    </div>
+    <div class="menu-toggle" id="menu-toggle">
+      <ul class="menu responsive">
+        <li><a th:href="@{/home}" class="create-event-btn nav-category">Home</a></li>
+        <li><a th:href="@{/logout}" id="logout-btn" class="navbar-btn">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<section class="auth-container">
+  <div class="auth-small-container">
+    <h2>Create an event</h2>
+    <div id="alertMessage" class="alert" style="display: none;"></div>
+    <form id="createEventForm">
+      <!--<input th:value="${session.userId}" name="organizer" id="organizer" type="hidden"/>-->
+      <input class="input"  name="eventName" id="eventName" type="text" placeholder="Event Name"/>
+      <input class="input"  name="eventDescription" id="eventDescription" type="text" placeholder="Event Description"/>
+      <input class="input"  name="eventDate" id="eventDate" type="date" placeholder="Event Date"/><br>
+      <label for="city" class="select-input">Event City: &nbsp;</label>
+      <select id="city" name="city">
+        <option value="Boston">Boston</option>
+        <option value="Miami">Miami</option>
+        <option value="New York">New York</option>
+        <option value="Los Angelos">Los Angelos</option>
+      </select>
+      <input class="input"  name="location" id="location" type="text" placeholder="Event Location"/><br>
+      <label for="category" class="select-input">Event Category:  &nbsp;</label>
+      <select id="category" name="category">
+        <option value="Entertainment">Entertainment</option>
+        <option value="TravelAndOutdoor">Travel & Outdoor</option>
+        <option value="CareerAndBusiness">Career & Business</option>
+        <option value="Technology">Technology</option>
+      </select>
+      <!--<label for="promoImage">Upload Event Poster: </label>
+      <input type="file" id="promoImage" name="promoImage"/><br/>-->
+      <input type="submit" class="action-btn" value="PUBLISH EVENT"/>
+    </form>
+  </div>
+</section>
+<script src="/js/userAuth.js"></script></body>
+</body>
+</html>
