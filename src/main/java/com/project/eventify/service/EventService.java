@@ -13,6 +13,7 @@ public class EventService {
 
     private final EventDao eventDao;
 
+
     @Autowired
     public EventService(EventDao eventDao) {
         this.eventDao = eventDao;
@@ -22,6 +23,12 @@ public class EventService {
         System.out.println("In EventService: " + event);
         eventDao.save(event);
         return event;
+    }
+
+
+    public Event getEvent(int id) {
+        System.out.println("In EventService:: getEvent" + id);
+        return eventDao.getEvent(id);
     }
 
     public List<Event> getAllEvents() {
@@ -59,4 +66,5 @@ public class EventService {
         System.out.println("In EventService :: getTotalPostedEventsByOrganizer");
         return eventDao.getTotalPostedEventsByOrganizer(org_id);
     }
+
 }

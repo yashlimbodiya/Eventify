@@ -10,7 +10,6 @@ $(document).ready(
 
         function fetchByCity() {
             const city = document.getElementById("location").value;
-            alert(city);
             // PREPARE FORM DATA
             // DO GET
             $.ajax({
@@ -23,12 +22,21 @@ $(document).ready(
                             var cardHtml =
                                 '<div class="column">' +
                                 '<div class="card">' +
-                                '<img src="./images/card-img.png" alt="" class="card-img">' +
+                                '<img src="./images/' + event.promoImage + '" alt="" class="card-img">' +
                                 '<div class="event-info">' +
                                 '<p class="event-name">' + event.eventName + '</p>' +
                                 '<p class="event-time">' + event.eventDate + '</p>' +
                                 '<p class="event-loc">' + event.location + '</p>' +
-                                '<a href="#" class="event-reg-btn">Register</a>' +
+                                '<a class="event-reg-btn" ' +
+                                ' th:data-user-id="${session.user_id}" th:data-event-name="${event.eventId}" ' +
+                                ' th:onclick="|saveRegistrationDetails(this.getAttribute(\'data-user-id\'), this.getAttribute(\'data-event-name\'))|">' +
+                                ' Register ' +
+                                ' </a>' +
+                                '<a class="event-reg-update-btn" ' +
+                                'th:data-user-id="${session.user_id}" th:data-event-name="${event.eventId}" ' +
+                                'th:onclick="|updateRegistrationDetails(this.getAttribute(\'data-user-id\'), this.getAttribute(\'data-event-name\'))|">' +
+                                'Not Interested' +
+                                '</a>' +
                                 '</div>' +
                                 '</div>' +
                                 '</div>';
@@ -50,7 +58,6 @@ $(document).ready(
     });
 
 function saveRegistrationDetails(user_id, eventId) {
-    alert("userID: " + user_id + " | eventId: " + eventId);
     $.ajax(
         {
             type: "GET",
@@ -118,14 +125,14 @@ function fetchByCategory(category) {
                 var cardHtml =
                     '<div class="column">' +
                     '<div class="card">' +
-                    '<img src="./images/card-img.png" alt="" class="card-img">' +
+                    '<img src="./images/' + event.promoImage + '" alt="" class="card-img">' +
                     '<div class="event-info">' +
                     '<p class="event-name">' + event.eventName + '</p>' +
                     '<p class="event-time">' + event.eventDate + '</p>' +
                     '<p class="event-loc">' + event.location + '</p>' +
-                    '<a href="#" class="event-reg-btn" th:data-user-id="${session.user_id}" th:data-event-name="${event.eventId}" ' +
+                    '<a class="event-reg-btn" th:data-user-id="${session.user_id}" th:data-event-name="${event.eventId}" ' +
                     'th:onclick="|saveRegistrationDetails(this.getAttribute(\'data-user-id\'), this.getAttribute(\'data-event-name\'))|">Register</a>' +
-                    '<a href="#" class="event-reg-update-btn" th:data-user-id="${session.user_id}" th:data-event-name="${event.eventId}" ' +
+                    '<a class="event-reg-update-btn" th:data-user-id="${session.user_id}" th:data-event-name="${event.eventId}" ' +
                     'th:onclick="|updateRegistrationDetails(this.getAttribute(\'data-user-id\'), this.getAttribute(\'data-event-name\'))|">Not Interested</a>' +
                     '</div>' +
                     '</div>' +

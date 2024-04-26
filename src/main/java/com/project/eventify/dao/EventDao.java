@@ -17,9 +17,13 @@ public class EventDao extends TransactionManager {
         System.out.println("In EventDao: " + event);
         return executeTransaction(session -> {
             session.persist(event);
-            event.setPromoImage("eventImage-"+event.getEventId());
             return event;
         });
+    }
+
+    public Event getEvent(int id) {
+        System.out.println("In EventDao: " + id);
+        return executeTransaction(session -> session.get(Event.class, id));
     }
 
     public List<Event> getAllEvents() {
@@ -50,8 +54,8 @@ public class EventDao extends TransactionManager {
     public List<Event> getEventsRsvpByUserId(int userId) {
         return executeTransaction(session -> {
             String hql = "SELECT e FROM Event e " +
-                    "JOIN EventRegistration er ON e.eventId = er.eventId " +
-                    "WHERE er.userId = :userId AND er.response = 'Accepted'";
+                    "JOIN EventRegistration er ON e.eventId = er.event.eventId " +
+                    "WHERE er.user.userId = :userId AND er.response = 'Accepted'";
             Query query = session.createQuery(hql, Event.class);
             query.setParameter("userId", userId);
 
@@ -70,21 +74,7 @@ public class EventDao extends TransactionManager {
 
     public Long getTotalRsvpOfAllEvents(int organizer) {
 
-        /*Long res = executeTransaction(session -> {
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
-            Root<EventRegistration> er = criteriaQuery.from(EventRegistration.class);
-            criteriaQuery.select(criteriaBuilder.count(er.get("rsvpId")));
-            Predicate acceptedResponse = criteriaBuilder.equal(er.get("response"), UserResponseType.Accepted);
-            Join<EventRegistration, Event> eventJoin = er.join("eventId"); // Join with Event entity
-            Predicate organizerId = criteriaBuilder.equal(eventJoin.get("organizer").get("userId"), 138);
-            criteriaQuery.where(criteriaBuilder.and(acceptedResponse, organizerId));
-            return session.createQuery(criteriaQuery).getSingleResult();
-        });
-        System.out.println("REs: " + res);
-        return res;*/
-
-        Long totalRsvp = executeTransaction(session -> {
+        return executeTransaction(session -> {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
             Root<EventRegistration> er = criteriaQuery.from(EventRegistration.class);
@@ -95,15 +85,13 @@ public class EventDao extends TransactionManager {
             Subquery<Integer> eventSubquery = criteriaQuery.subquery(Integer.class);
             Root<Event> eventRoot = eventSubquery.from(Event.class);
             eventSubquery.select(eventRoot.get("eventId"));
-            Predicate organizerId = criteriaBuilder.equal(eventRoot.get("userId").get("id"), 138);
+            Predicate organizerId = criteriaBuilder.equal(eventRoot.get("userId").get("id"), organizer);
             eventSubquery.where(organizerId);
 
             criteriaQuery.where(criteriaBuilder.and(acceptedResponse, er.get("eventId").in(eventSubquery)));
 
             return (Long) session.createQuery(criteriaQuery).getSingleResult();
         });
-        System.out.println("Res " + totalRsvp);
-        return totalRsvp;
     }
 
 }

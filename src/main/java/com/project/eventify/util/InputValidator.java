@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+//This class validate the input values provided by the user. Its uses several criteria to valid and sanitize inputs
 public class InputValidator {
 
     private String userInput;

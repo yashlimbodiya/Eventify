@@ -3,6 +3,7 @@ package com.project.eventify.service;
 import com.project.eventify.dao.EventRegistrationDao;
 import com.project.eventify.model.Event;
 import com.project.eventify.model.EventRegistration;
+import com.project.eventify.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,12 @@ public class EventRegistrationService {
         this.eventRegistrationDao = eventRegistrationDao;
     }
 
-    public EventRegistration saveEvent(EventRegistration er) {
+    public EventRegistration saveEvent(EventRegistration er, User user, Event event) {
         System.out.println("In EventRegistrationService: " + er);
-        return eventRegistrationDao.saveEventRegistration(er);
+        return eventRegistrationDao.saveEventRegistration(er, user, event);
     }
 
-    public List<EventRegistration> getRsvpDetails(int userId, int eventId) {
+    public List<EventRegistration> getRsvpDetails(User userId, Event eventId) {
         System.out.println("In EventRegistrationService :: getRsvpDetails");
         return eventRegistrationDao.getRsvpDetails(userId, eventId);
     }

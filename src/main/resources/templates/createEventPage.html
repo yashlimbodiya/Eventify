@@ -24,7 +24,7 @@
   <div class="auth-small-container">
     <h2>Create an event</h2>
     <div id="alertMessage" class="alert" style="display: none;"></div>
-    <form id="createEventForm">
+    <form id="createEventForm" enctype="multipart/form-data">
       <!--<input th:value="${session.userId}" name="organizer" id="organizer" type="hidden"/>-->
       <input class="input"  name="eventName" id="eventName" type="text" placeholder="Event Name"/>
       <input class="input"  name="eventDescription" id="eventDescription" type="text" placeholder="Event Description"/>
@@ -44,8 +44,10 @@
         <option value="CareerAndBusiness">Career & Business</option>
         <option value="Technology">Technology</option>
       </select>
-      <!--<label for="promoImage">Upload Event Poster: </label>
-      <input type="file" id="promoImage" name="promoImage"/><br/>-->
+      <br>
+      <br>
+      <label for="promoImageFile" class="select-input">Upload Event Poster: </label>
+      <input type="file" id="promoImageFile" name="promoImageFile" /><br/>
       <input type="submit" class="action-btn" value="PUBLISH EVENT"/>
     </form>
   </div>

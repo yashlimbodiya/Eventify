@@ -123,7 +123,7 @@ $(document).ready(function() {
             }
         });
     });*/
-    $('#createEventForm').submit(function(event) {
+    /*$('#createEventForm').submit(function(event) {
         event.preventDefault();
         var formData = {
             eventName: $('#eventName').val(),
@@ -145,6 +145,45 @@ $(document).ready(function() {
                 location : formData.location,
                 category : formData.category
             },
+            success: function(response) {
+                if(response != null && response === "success") {
+                    alert("Event Posted Successfully");
+                    window.location.href = '/home';
+                } else {
+                    this.error(response);
+                }
+            },
+            error: function(response) {
+                $('#alertMessage').text(response).show();
+            }
+        });
+    });*/
+
+    $('#createEventForm').submit(function(event) {
+        event.preventDefault();
+        var formData = new FormData();
+        formData.append('eventName', $('#eventName').val());
+        formData.append('eventDescription', $('#eventDescription').val());
+        formData.append('eventDate', $('#eventDate').val());
+        formData.append('city', $('#city').val());
+        formData.append('location', $('#location').val());
+        formData.append('category', $('#category').val());
+
+        // Append the image file to the FormData object
+        var promoImage = $('#promoImageFile')[0].files[0];
+        console.log("promoImageFile: " + promoImage.name);
+        formData.append('promoImage', promoImage.name);
+        formData.append('promoImageFile', promoImage);
+
+        $.ajax({
+            type: 'POST',
+            url: '/saveEvent',
+            enctype:'multipart/form-data',
+            contentType: false,
+            data: formData,
+            cache: false,
+            processData: false, // Prevent jQuery from automatically processing the data
+            // Prevent jQuery from automatically setting the content type
             success: function(response) {
                 if(response != null && response === "success") {
                     alert("Event Posted Successfully");

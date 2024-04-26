@@ -1,6 +1,8 @@
 package com.project.eventify.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
+
 
 @Entity
 @Table(name = "event_registration")
@@ -10,11 +12,14 @@ public class EventRegistration {
     @Column(name = "rsvp_id")
     private int rsvpId;
 
-    @Column(name = "user_id")
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @Column(name = "event_id")
-    private int eventId;
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
+    private Event event;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "response")
@@ -23,24 +28,24 @@ public class EventRegistration {
         return rsvpId;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
     public void setRsvpId(int rsvpId) {
         this.rsvpId = rsvpId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
     }
 
     public UserResponseType getResponse() {
@@ -54,10 +59,20 @@ public class EventRegistration {
     public EventRegistration() {
     }
 
-    public EventRegistration(int rsvpId, int userId, int eventId, UserResponseType response) {
+    @Override
+    public String toString() {
+        return "EventRegistration{" +
+                "rsvpId=" + rsvpId +
+                ", user=" + user +
+                ", event=" + event +
+                ", response=" + response +
+                '}';
+    }
+
+    public EventRegistration(int rsvpId, User user, Event event, UserResponseType response) {
         this.rsvpId = rsvpId;
-        this.userId = userId;
-        this.eventId = eventId;
+        this.event = event;
+        this.user = user;
         this.response = response;
     }
 }

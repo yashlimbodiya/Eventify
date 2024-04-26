@@ -19,12 +19,10 @@ import java.util.List;
 
 @Controller
 public class OrganizerController {
-    private final UserService userService;
     private final EventService eventService;
 
     @Autowired
-    public OrganizerController(UserService userService, EventService eventService) {
-        this.userService = userService;
+    public OrganizerController(EventService eventService) {
         this.eventService = eventService;
     }
 

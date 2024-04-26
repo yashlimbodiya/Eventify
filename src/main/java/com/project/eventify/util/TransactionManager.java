@@ -4,6 +4,8 @@ import com.project.eventify.config.HibernateConfig;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.Arrays;
+
 public class TransactionManager  {
     protected <T> T executeTransaction(TransactionExecutor<T> executor) {
         T result = null;
@@ -14,6 +16,8 @@ public class TransactionManager  {
             result = executor.execute(session);
             transaction.commit();
         } catch (Exception e) {
+            System.out.println("Exception in TransactionManager: " + e.getMessage());
+            System.out.println("Exception in TransactionManager Stack: " + Arrays.toString(e.getStackTrace()));
             if (transaction != null) {
                 transaction.rollback();
             }

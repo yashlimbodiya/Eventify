@@ -28,7 +28,6 @@ public class UserDao extends TransactionManager {
             CriteriaQuery<User> query = builder.createQuery(User.class);
             Root<User> root = query.from(User.class);
             query.select(root).where(builder.equal(root.get("email"), email));
-            System.out.println("GET BY EMAIL");
             return session.createQuery(query).uniqueResult();
         });
     }

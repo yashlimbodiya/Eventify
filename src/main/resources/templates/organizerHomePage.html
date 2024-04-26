@@ -40,12 +40,13 @@
         <div class="row">
             <div class="column" th:each="event : ${eventList}">
                 <div class="card">
-                    <img src="./images/card-img.png" alt="" class="card-img">
+                    <img th:src="@{${'./images/' + event.promoImage}}" alt="" class="card-img">
                     <div class="event-info">
                         <p class="event-name" th:text="${event.eventName}"></p>
                         <p class="event-time" th:text="${event.eventDate}"></p>
                         <p class="event-loc" th:text="${event.location}"></p>
-                        <a href="#" class="event-reg-btn">View Details</a>
+                        <a th:data-event-id="${event.eventId}"
+                           th:href="@{/rsvpedUsers(eventId=${event.eventId})}" class="event-reg-btn">View Details</a>
                     </div>
                 </div>
             </div>

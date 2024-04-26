@@ -1,8 +1,10 @@
 package com.project.eventify.controller;
 
+import com.project.eventify.model.Event;
 import com.project.eventify.model.User;
 import com.project.eventify.service.EventService;
 import com.project.eventify.service.UserService;
+import com.project.eventify.util.InputEncoderDecoder;
 import com.project.eventify.util.InputValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,10 +24,12 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final EventService eventService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, EventService eventService) {
         this.userService = userService;
+        this.eventService = eventService;
     }
 
     @ResponseBody
@@ -40,6 +45,7 @@ public class UserController {
         if(existingUser != null) {
             return "Sign in to this account or enter an email address that isn't already in use.";
         }
+        user.setPassword(InputEncoderDecoder.encode(user.getPassword()));
         User new_user = userService.saveUser(user/*, encoder*/);
         if(new_user == null) {
             return "Technical error - Something went wrong";
@@ -63,11 +69,9 @@ public class UserController {
         }
         HttpSession session = request.getSession(true);
         session.setAttribute("username", request.getParameter("username"));
-        System.out.println("UserAuthController::authenticateUser" + session.getAttribute("userId"));
         User user = userService.getByEmail(username);
         session.setAttribute("user_id", user.getUserId());
         session.setAttribute("userFirstName", user.getFirstName());
-        System.out.println("User in UC: " + user);
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
         response.setHeader("Pragma", "no-cache"); // HTTP 1.0
         response.setHeader("Expires", "0"); // Proxies
@@ -95,6 +99,17 @@ public class UserController {
             res.append(u.toString());
         }
         return res.toString();
+    }
+
+    @GetMapping("/rsvpedUsers")
+    public ModelAndView getListOfUsersRsvpedEvent(@RequestParam String eventId, ModelAndView mv) {
+        int eId = Integer.parseInt(eventId);
+        mv.setViewName("viewEventDetailsPage");
+        List<Object[]> rsvpedUsers = userService.getListOfUsersRsvpedEvent(eId);
+        Event event = eventService.getEvent(eId);
+        mv.addObject("event", event);
+        mv.addObject("usersArray", rsvpedUsers);
+        return mv;
     }
 
 }

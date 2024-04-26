@@ -16,9 +16,7 @@ public class HibernateConfig {
             configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3307/Eventify");
             configuration.setProperty("hibernate.connection.username", "root");
             configuration.setProperty("hibernate.connection.password", "root");
-
             configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-
             configuration.setProperty("hibernate.hbm2ddl.auto", "update");
 
             configuration.addAnnotatedClass(com.project.eventify.model.User.class);
@@ -30,8 +28,8 @@ public class HibernateConfig {
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
-
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);

@@ -10,8 +10,6 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -34,11 +32,8 @@ public class HomePageController {
     public ModelAndView getInformation(HttpServletRequest request, ModelAndView mv) {
         HttpSession session = request.getSession(false);
         User user = null;
-        System.out.println("Outside IF " + session.getAttribute("username"));
         if(session != null && session.getAttribute("username") != null) {
-            System.out.println("Inside IF");
             user = userService.getByEmail((String)session.getAttribute("username"));
-            System.out.println("Inside IF | " + user);
         }
         String viewName;
         List<Event> events;

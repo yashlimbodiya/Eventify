@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventify</title>
+    <link rel="stylesheet" href="/css/landingPage.css">
+    <link rel="stylesheet" href="/css/card.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <a href="#"><img src="./images/logo-color.png" alt="Eventify Logo"></a>
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <ul class="menu responsive">
+                <li><a th:href="@{/createEvent}" class="create-event-btn nav-category">+ Create Event</a></li>
+                <li><a th:href="@{/home}" class="create-event-btn nav-category">Home</a></li>
+                <li><a th:href="@{/logout}" id="logout-btn" class="navbar-btn">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section class="hero-section-home">
+    <div class="user-intro">
+        Event Name <h2 th:text="${event.eventName}"></h2>
+    </div>
+    <hr>
+    <div class="card-container">
+            <table class="table">
+                <thead class="thead">
+                <tr class="tr">
+                    <th class="th">Name</th>
+                    <th class="th">Email</th>
+                </tr>
+                </thead>
+                <tbody class="tbody">
+                <tr class="tr" th:each="user : ${usersArray}">
+                    <td class="td" th:text="${user[0]} + ' ' + ${user[1]}"></td>
+                    <td class="td" th:text="${user[2]}"></td>
+                </tr>
+                </tbody>
+            </table>
+    </div>
+</section>
+
+
+</body>
+
+</html>

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
+//LandingPageController class handles the navigation on LandingPage
 @Controller
 public class LandingPageController {
 
@@ -29,7 +31,7 @@ public class LandingPageController {
 
     @GetMapping("/becameOrganizer")
     public String registerOrganizer() {
-        System.out.println("On Landing Page - register");
+        System.out.println("On Landing Page - registerOrganizer");
         return "organizerRegisterPage";
     }
 }
