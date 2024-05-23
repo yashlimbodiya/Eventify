@@ -110,6 +110,15 @@ eventify/
 
 ![image](https://github.com/yashlimbodiya/Eventify/assets/65219027/5c341041-f352-4904-8a3b-5a5a663a4b75)
 
+![Login Page](https://github.com/yashlimbodiya/Eventify/assets/65219027/8baabb7c-54e2-4727-a1e6-04b532366235)
+
+![Home Page](https://github.com/yashlimbodiya/Eventify/assets/65219027/59d3e233-1819-4b04-b7a2-3a02056c2e80)
+
+![MyAccount](https://github.com/yashlimbodiya/Eventify/assets/65219027/a6e090c8-d103-4389-86c2-048aa4b285e3)
+
+
+
+
 
 ---
 
