@@ -106,6 +106,11 @@ eventify/
 └── ...
 ```
 
+## Screenshots
+
+![image](https://github.com/yashlimbodiya/Eventify/assets/65219027/5c341041-f352-4904-8a3b-5a5a663a4b75)
+
+
 ---
 
 Thank you for using Eventify! We hope you have a fantastic time discovering and attending events. Happy event hunting!
